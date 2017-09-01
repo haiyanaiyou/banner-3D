@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>banner 3d效果</title>
+		<style>
+			*{
+				padding: 0;
+				margin: 0;
+			}
+			section{
+				margin: auto;
+				width: 1000px;
+				height: 500px;
+				margin-top: 100px;
+				position: relative;
+				perspective: 1000px;
+				cursor: pointer;
+				
+			}
+			.cover{
+				width: 100%;
+				height: 100%;
+				background: darkcyan;
+				border-radius: 50px;
+				padding-top: 30px;
+				transform-origin:50% 50% 0 ;
+				box-sizing: border-box;
+			}
+			.cover h1{
+				color: white;
+				text-align: center;
+				
+			}
+		</style>
+	</head>
+	<body>
+		<section>
+			<div class="cover">
+				<h1>hello</h1>
+			</div>
+		</section>
+	</body>
+	<script type="text/javascript">
+		var origin = {
+			X:document.body.clientWidth/2,
+			Y:document.body.clientHeight/2
+		};
+		var o = document.querySelector('.cover');
+		var area = document.querySelector('section');
+		area.onmouseover = function (){
+			area.addEventListener('mouseover',function(e){
+				var rotate ={x: 1-e.pageY/origin.Y,
+							 y:e.pageX/origin.X -1
+							};
+				var transform = "rotateX(" + rotate.x *10 + "deg) rotateY(" + rotate.y * 10 + "deg)"; 
+				o.style.transform = transform;
+				o.style.boxShadow = -parseInt(rotate.y * 30) + 'px '+ parseInt(rotate.x * 20+20)+ 'px ' + '50px #333';
+				
+			});
+		};
+		area.onmouseout = function(){
+			o.style.transform ="rotateX(0deg) rotateY(0deg)";
+        	o.style.boxShadow ='0px 0px';
+		}
+	</script>
+</html>
